@@ -1,7 +1,7 @@
 AngularLaravelBlog
 ==================
 
-This is a work in progress blog engine that uses Angular JS and Laravel.
+This is a work in progress blog engine that uses Angular JS and Laravel. Bootstrapped using [ng-boilerplate] (https://github.com/joshdmiller/ng-boilerplate).
 
 Note:
 -----
