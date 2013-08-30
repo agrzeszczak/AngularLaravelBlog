@@ -102,7 +102,12 @@ angular.module( 'ngBoilerplate.admin', [
     });
 })
 
-.controller( 'ArticlesListCtrl', function ArticlesListCtrl($scope, $http) {
+.controller( 'ArticlesListCtrl', function ArticlesListCtrl($scope, $http, $location) {
+    $http.get('../api/checkStatus').success(function(response) {
+        if(response === 'Not Authorized.'){
+            $location.path('/login');
+        }
+    });
     $http.get('../api/articles').success(function(data) {
         var articles= data;
         $scope.articles = articles;
@@ -110,7 +115,11 @@ angular.module( 'ngBoilerplate.admin', [
 })
 
 .controller( 'ArticlesAdminCtrl', function ArticlesAdminCtrl($scope, $http, $state, titleService, $location, $timeout) {
-    
+    $http.get('../api/checkStatus').success(function(response) {
+        if(response === 'Not Authorized.'){
+            $location.path('/login');
+        }
+    });
     if($state.params.id === 'new'){
         $scope.edit = false;
         $scope.remove = false;
