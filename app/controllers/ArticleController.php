@@ -63,8 +63,13 @@ class ArticleController extends Controller {
 	public function show($id)
 	{
             $articles = Article::where('slug', '=', $id)->take(1)->get();
-            
-            foreach($articles as $article){
+            if( count($articles) ){
+                foreach($articles as $article){
+                    $json = $article['attributes'];
+                }
+            }
+            else {
+                $article = Article::find($id);
                 $json = $article['attributes'];
             }
             return json_encode($json);
@@ -80,7 +85,7 @@ class ArticleController extends Controller {
 	{
             $request_body = file_get_contents('php://input');
             $request = json_decode($request_body);
-            var_dump($request);
+            
             $article = Article::find($request->_id);
             $article->content = $request->content;
             $article->slug = $request->slug;
@@ -105,7 +110,23 @@ class ArticleController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+            $request_body = file_get_contents('php://input');
+            $request = json_decode($request_body);
+
+            $article = Article::find($id);
+            $article->content = $request->content;
+            $article->slug = $request->slug;
+            $article->title = $request->title;
+            $article->date = date("Y-m-d");
+            
+            if($article->save()){
+                $message = array('message'=>'Article Saved Correctly.');
+            }
+            else {
+                $message = array('message'=>'Sorry. There was a database error.');
+            }
+            $message = json_encode($message);
+            return $message;
 	}
 
 	/**

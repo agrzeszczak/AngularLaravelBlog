@@ -6,6 +6,21 @@ angular.module( 'ngBoilerplate.admin', [
 ])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'admin/articles/:id/:method', {
+    url: '/admin/articles/:id/:method',
+    views: {
+      "main": {
+        controller: 'ArticlesAdminCtrl',
+        templateUrl: 'admin/articles-detail.tpl.html'
+      },
+      "menu": {
+        controller: 'AdminMenuCtrl',
+        templateUrl: 'admin/adminmenu.tpl.html'
+      }
+    }
+  });
+})
+.config(function config( $stateProvider ) {
+  $stateProvider.state( 'admin/articles/:id', {
     url: '/admin/articles/:id',
     views: {
       "main": {
@@ -65,8 +80,10 @@ angular.module( 'ngBoilerplate.admin', [
         $scope.articles = articles;
     });
 })
-.controller( 'ArticlesAdminCtrl', function ArticlesAdminCtrl($scope, $http, $state) {
+
+.controller( 'ArticlesAdminCtrl', function ArticlesAdminCtrl($scope, $http, $state, titleService) {
     if($state.params.id === 'new'){
+        $scope.edit = false;
         $scope.header = "Add a New Article";
         $scope.article = function(){
         $http({
@@ -89,6 +106,29 @@ angular.module( 'ngBoilerplate.admin', [
     }
     else {
         $scope.header = "Edit an Article";
+        $scope.edit = true;
+        
+        $http.get('../api/articles/'+$state.params.id).success(function(data) {
+            $scope.input = data;
+            titleService.setTitle( $scope.input.title );
+        });
+        
+        $scope.article = function(){
+        $http({
+            method: 'PUT',
+            url: '../api/articles/'+$state.params.id,
+            data: $scope.input
+        }).
+            success(function(response) {
+        
+                if (response.message === 'Article Saved Correctly.'){
+                    $scope.messageClass = 'alert alert-success';
+                    $scope.message = 'Article Was Updated Successfully.';
+                }
+                else {
+                }
+            });
+        };
         
     }
 })
