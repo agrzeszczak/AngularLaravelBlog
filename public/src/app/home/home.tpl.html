@@ -1,2 +1,7 @@
-
-
+<h2>Articles:</h2>
+<ul>
+    <li ng-repeat="article in articles">
+      <strong><a ng-href="#/article/{{article.slug}}"/>{{article.title}}</a></strong> Published: {{article.date | date:'shortDate' }}
+      <p>{{article.content}}</p>
+    </li>
+</ul>
