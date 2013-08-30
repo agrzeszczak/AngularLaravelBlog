@@ -34,24 +34,28 @@ class ArticleController extends Controller {
 	 */
 	public function store()
 	{
-            
-            $request_body = file_get_contents('php://input');
-            $request = json_decode($request_body);
+            if (Auth::check()) {
 
-            $article = new Article;
-            $article->content = $request->content;
-            $article->slug = $request->slug;
-            $article->title = $request->title;
-            $article->date = date("Y-m-d");
-            
-            if($article->save()){
-                $message = array('message'=>'Article Saved Correctly.');
+                $request_body = file_get_contents('php://input');
+                $request = json_decode($request_body);
+
+                $article = new Article;
+                $article->content = $request->content;
+                $article->slug = $request->slug;
+                $article->title = $request->title;
+                $article->date = date("Y-m-d");
+
+                if($article->save()){
+                    $message = array('message'=>'Article Saved Correctly.');
+                }
+                else {
+                    $message = array('message'=>'Sorry. There was a database error.');
+                }
+                $message = json_encode($message);
+                return $message;
+                
             }
-            else {
-                $message = array('message'=>'Sorry. There was a database error.');
-            }
-            $message = json_encode($message);
-            return $message;
+            else return 'Not Authorized.';
 	}
 
 	/**
@@ -83,23 +87,28 @@ class ArticleController extends Controller {
 	 */
 	public function edit($id)
 	{
-            $request_body = file_get_contents('php://input');
-            $request = json_decode($request_body);
-            
-            $article = Article::find($request->_id);
-            $article->content = $request->content;
-            $article->slug = $request->slug;
-            $article->title = $request->title;
-            $article->date = date("Y-m-d");
-            
-            if($article->save()){
-                $message = array('message'=>'Article Saved Correctly.');
+            if (Auth::check()) {
+                $request_body = file_get_contents('php://input');
+                $request = json_decode($request_body);
+
+                $article = Article::find($request->_id);
+                $article->content = $request->content;
+                $article->slug = $request->slug;
+                $article->title = $request->title;
+                $article->date = date("Y-m-d");
+
+                if($article->save()){
+                    $message = array('message'=>'Article Saved Correctly.');
+                }
+                else {
+                    $message = array('message'=>'Sorry. There was a database error.');
+                }
+                $message = json_encode($message);
+                return $message;
             }
             else {
-                $message = array('message'=>'Sorry. There was a database error.');
+                return 'Not Authorized.';
             }
-            $message = json_encode($message);
-            return $message;
 	}
 
 	/**
@@ -110,23 +119,26 @@ class ArticleController extends Controller {
 	 */
 	public function update($id)
 	{
-            $request_body = file_get_contents('php://input');
-            $request = json_decode($request_body);
+            if (Auth::check()) {
+                $request_body = file_get_contents('php://input');
+                $request = json_decode($request_body);
 
-            $article = Article::find($id);
-            $article->content = $request->content;
-            $article->slug = $request->slug;
-            $article->title = $request->title;
-            $article->date = date("Y-m-d");
-            
-            if($article->save()){
-                $message = array('message'=>'Article Saved Correctly.');
+                $article = Article::find($id);
+                $article->content = $request->content;
+                $article->slug = $request->slug;
+                $article->title = $request->title;
+                $article->date = date("Y-m-d");
+
+                if($article->save()){
+                    $message = array('message'=>'Article Saved Correctly.');
+                }
+                else {
+                    $message = array('message'=>'Sorry. There was a database error.');
+                }
+                $message = json_encode($message);
+                return $message;
             }
-            else {
-                $message = array('message'=>'Sorry. There was a database error.');
-            }
-            $message = json_encode($message);
-            return $message;
+            else return 'Not Authorized.';
 	}
 
 	/**
@@ -137,16 +149,19 @@ class ArticleController extends Controller {
 	 */
 	public function destroy($id)
 	{
-            $article = Article::find($id);
-            
-            if($article->delete()){
-                $message = array('message'=>'Article Removed Correctly.');
+            if (Auth::check()) {
+                $article = Article::find($id);
+
+                if($article->delete()){
+                    $message = array('message'=>'Article Removed Correctly.');
+                }
+                else {
+                    $message = array('message'=>'Sorry. There was a database error.');
+                }
+                $message = json_encode($message);
+                return $message;
             }
-            else {
-                $message = array('message'=>'Sorry. There was a database error.');
-            }
-            $message = json_encode($message);
-            return $message;
+            else return 'Not Authorized.';
             
 	}
 
