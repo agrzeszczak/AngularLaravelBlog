@@ -17,8 +17,12 @@
 #### Articles Editing
 - Default see list articles
 - Articles are edited by _id in database
+- CRUD's on articles are tracking user
 
-##Would be nice
+#### Users
+- CRUD on users
+
+## Would be nice
 
 ### Public Access
 
@@ -26,7 +30,3 @@
 
 #### Articles
 - Article id's are auto-incrementing and less crazy
-
-##Long term
-### Public Access
-### Backend Access
