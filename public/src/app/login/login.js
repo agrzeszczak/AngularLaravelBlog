@@ -25,6 +25,12 @@ angular.module( 'ngBoilerplate.login', [
   
   titleService.setTitle( 'Login' );
   
+  $http.get('../api/checkStatus').success(function(response) {
+        if(response === 'Yes'){
+            $location.path('/admin');
+        }
+    });
+  
   $scope.login = {email: "", password: ""};
     $scope.checkLogin = function(){
         $scope.alert = 'alert';
