@@ -30,6 +30,10 @@ angular.module( 'ngBoilerplate.home', [
       "main": {
         controller: 'HomeCtrl',
         templateUrl: 'home/home.tpl.html'
+      },
+      "menu": {
+        controller: 'MenuCtrl',
+        templateUrl: 'menu/menu.tpl.html'
       }
     }
   });
@@ -38,8 +42,12 @@ angular.module( 'ngBoilerplate.home', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function HomeController( $scope, titleService ) {
+.controller( 'HomeCtrl', function HomeController( $scope, titleService, $http ) {
   titleService.setTitle( 'Home' );
+  $http.get('../api/articles', {"cache" : true}).success(function(data) {
+        var articles= data;
+        $scope.articles = articles;
+    });
 })
 
 ;
