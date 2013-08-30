@@ -29,6 +29,7 @@
 ### Public Access
 
 ### Backend Access
-
+#### Article Editing
+- Markdown editor friendly
 #### Articles
 - Article id's are auto-incrementing and less crazy
