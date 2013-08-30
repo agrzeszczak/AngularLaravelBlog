@@ -16,8 +16,6 @@
 - CSRF Tokens
 
 #### Articles Editing
-- Default see list articles
-- Articles are edited by _id in database
 - CRUD's on articles are tracking user
 - Handle Not Authorized Access
 
