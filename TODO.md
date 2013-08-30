@@ -10,14 +10,16 @@
 
 #### Article View
 - Handles some sort of markdown to handle html
+- Handle Articles Not Found
 
 ### Backend Access
-- Check to see if user is logged in
+- CSRF Tokens
 
 #### Articles Editing
 - Default see list articles
 - Articles are edited by _id in database
 - CRUD's on articles are tracking user
+- Handle Not Authorized Access
 
 #### Users
 - CRUD on users
