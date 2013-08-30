@@ -11,10 +11,5 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
-
 Route::resource('articles', 'ArticleController');
 Route::resource('users', 'UserController');
