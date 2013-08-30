@@ -88,9 +88,9 @@ angular.module( 'ngBoilerplate.admin', [
       { title : "Logout", link: "#/admin/logout"}
     ];
 })
-.controller( 'AdminCtrl', function AdminMenuCtrl($scope, $http) {
+.controller( 'AdminCtrl', function AdminMenuCtrl($location, $http) {
     $http.get('../api/checkStatus').success(function(response) {
-        if(response.message === 'Not Authorized'){
+        if(response === 'Not Authorized.'){
             $location.path('/login');
         }
     });
@@ -129,7 +129,7 @@ angular.module( 'ngBoilerplate.admin', [
                     $scope.messageClass = 'alert alert-success';
                     $scope.message = response.message;
                 }
-                else if(response.message === 'Not Authorized'){
+                else if(response === 'Not Authorized.'){
                     $location.path('/login');
                 }
             });
@@ -157,7 +157,7 @@ angular.module( 'ngBoilerplate.admin', [
                     $scope.messageClass = 'alert alert-success';
                     $scope.message = 'Article Was Updated Successfully.';
                 }
-                else if(response.message === 'Not Authorized'){
+                else if(response === 'Not Authorized.'){
                     $location.path('/login');
                 }
             });
@@ -190,8 +190,8 @@ angular.module( 'ngBoilerplate.admin', [
                         $location.path('/admin/articles');
                     },3000);
                 }
-                else if(response.message === 'Not Authorized'){
-                    $location.path('/login');
+                else if(response === 'Not Authorized.'){
+                    $location.path('/login'); 
                 }
             });
         };
