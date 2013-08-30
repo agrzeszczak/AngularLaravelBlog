@@ -36,3 +36,11 @@ Route::get('logout', function () {
     Auth::logout();
     return "success";
 });
+
+Route::get('checkStatus', function () {
+    if(Auth::check()){
+        return "Yes";
+    }
+    else return 'Not Authorized.';
+    
+});
