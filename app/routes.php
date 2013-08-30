@@ -31,3 +31,8 @@ Route::post('login', function()
     $message = json_encode($message);
     return $message;
 });
+
+Route::get('logout', function () {
+    Auth::logout();
+    return "success";
+});
