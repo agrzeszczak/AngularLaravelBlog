@@ -6,4 +6,4 @@ This is a work in progress blog engine that uses Angular JS and Laravel. Bootstr
 Note:
 -----
 
-This is not a production ready project. Please see TODO.md to see the correct road map for the software.
+This is not a production ready project. Please see TODO.md to see the current road map for the software.
