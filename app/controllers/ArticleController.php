@@ -137,7 +137,17 @@ class ArticleController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+            $article = Article::find($id);
+            
+            if($article->delete()){
+                $message = array('message'=>'Article Removed Correctly.');
+            }
+            else {
+                $message = array('message'=>'Sorry. There was a database error.');
+            }
+            $message = json_encode($message);
+            return $message;
+            
 	}
 
 }

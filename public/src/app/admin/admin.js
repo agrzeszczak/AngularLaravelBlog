@@ -4,6 +4,7 @@ angular.module( 'ngBoilerplate.admin', [
   'ui.bootstrap',
   'titleService'
 ])
+
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'admin/articles/:id/:method', {
     url: '/admin/articles/:id/:method',
@@ -81,9 +82,11 @@ angular.module( 'ngBoilerplate.admin', [
     });
 })
 
-.controller( 'ArticlesAdminCtrl', function ArticlesAdminCtrl($scope, $http, $state, titleService) {
+.controller( 'ArticlesAdminCtrl', function ArticlesAdminCtrl($scope, $http, $state, titleService, $location, $timeout) {
+    
     if($state.params.id === 'new'){
         $scope.edit = false;
+        $scope.remove = false;
         $scope.header = "Add a New Article";
         $scope.article = function(){
         $http({
@@ -104,9 +107,10 @@ angular.module( 'ngBoilerplate.admin', [
             });
         };
     }
-    else {
+    else if($state.params.method === 'edit'){
         $scope.header = "Edit an Article";
         $scope.edit = true;
+        $scope.remove = false;
         
         $http.get('../api/articles/'+$state.params.id).success(function(data) {
             $scope.input = data;
@@ -124,6 +128,38 @@ angular.module( 'ngBoilerplate.admin', [
                 if (response.message === 'Article Saved Correctly.'){
                     $scope.messageClass = 'alert alert-success';
                     $scope.message = 'Article Was Updated Successfully.';
+                }
+                else {
+                }
+            });
+        };
+        
+    }
+    
+    else if($state.params.method === 'delete'){
+        
+        $scope.remove = true;
+        
+        $http.get('../api/articles/'+$state.params.id).success(function(data) {
+            $scope.input = data;
+        });
+        $scope.redirect = function(){
+            $location.path('/admin/articles');
+        };
+        
+        $scope.article = function(){
+        $http({
+            method: 'DELETE',
+            url: '../api/articles/'+$state.params.id
+        }).
+            success(function(response) {
+        
+                if (response.message === 'Article Removed Correctly.'){
+                    $scope.messageClass = 'alert alert-success';
+                    $scope.message = 'Article Was Removed Successfully.';
+                    $timeout(function () {
+                        $location.path('/admin/articles');
+                    },3000);
                 }
                 else {
                 }

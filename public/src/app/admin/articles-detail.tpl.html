@@ -1,14 +1,23 @@
-<h2>{{header}}</h2>
-<div ng-show="edit"><h3>ID: {{input._id}}</h3></div>
-<div ng-class="messageClass">{{message}}</div>
-<form ng-submit="article()">
-  <fieldset>
-    <label>Title</label>
-    <input type="text" placeholder="Insert Title Name" ng-model="input.title">
-    <label>Slug</label>
-    <input type="text" placeholder="Provide A Slug" ng-model="input.slug">
-    <label>Article Body</label>
-    <textarea ng-model="input.content" rows="20" class="span12"></textarea><br />
-    <button type="submit" class="btn">Submit</button>
-  </fieldset>
-</form>
+<div ng-show="!remove">
+    <h2>{{header}}</h2>
+    <div ng-show="edit"><h3>ID: {{input._id}}</h3></div>
+    <div ng-class="messageClass">{{message}}</div>
+    <form ng-submit="article()">
+      <fieldset>
+        <label>Title</label>
+        <input type="text" placeholder="Insert Title Name" ng-model="input.title">
+        <label>Slug</label>
+        <input type="text" placeholder="Provide A Slug" ng-model="input.slug">
+        <label>Article Body</label>
+        <textarea ng-model="input.content" rows="20" class="span12"></textarea><br />
+        <button type="submit" class="btn">Submit</button>
+      </fieldset>
+    </form>
+</div>
+
+<div ng-show="remove">
+    <h5>Are you sure you want to delete {{input.title}}?</h5><br />
+    <button class="btn btn-danger" ng-click="article()">Yes</button>
+    <button class="btn btn-inverse" ng-click="redirect()">No</button>
+    <div ng-class="messageClass">{{message}}</div>
+</div>
