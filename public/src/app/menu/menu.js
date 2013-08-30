@@ -7,6 +7,6 @@ angular.module( 'ngBoilerplate.menu', [
 
 .controller( 'MenuCtrl', function MenuCtrl($scope) {
     $scope.menu = [
-      { title : "Home", link: "#/home"}  
+      { title : "Home", link: "#/home"}
     ];
 });

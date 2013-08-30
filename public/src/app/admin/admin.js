@@ -65,14 +65,36 @@ angular.module( 'ngBoilerplate.admin', [
     }
   });
 })
+.config(function config( $stateProvider ) {
+  $stateProvider.state( '/admin/logout', {
+    url: '/admin/logout',
+    views: {
+      "main": {
+        controller: 'LogoutCtrl',
+        templateUrl: 'admin/logout.tpl.html'
+      },
+      "menu": {
+        controller: 'AdminMenuCtrl',
+        templateUrl: 'admin/adminmenu.tpl.html'
+      }
+    }
+  });
+})
 
 .controller( 'AdminMenuCtrl', function AdminMenuCtrl($scope) {
     $scope.menu = [
       { title : "Articles", link: "#/admin/articles"} ,
-      { title : "Users", link: "#/admin/users"}  
+      { title : "Users", link: "#/admin/users"},
+      { title : "Logout", link: "#/admin/logout"}
     ];
 })
 .controller( 'AdminCtrl', function AdminMenuCtrl($scope) {
+})
+
+.controller( 'LogoutCtrl', function LogoutCtrl($scope, $http) {
+    $http.get('../api/logout').success(function(data) {
+        $scope.message = 'You have been successfully logged out.';
+    });
 })
 
 .controller( 'ArticlesListCtrl', function ArticlesListCtrl($scope, $http) {
