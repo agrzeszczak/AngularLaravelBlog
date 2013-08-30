@@ -1,6 +1,6 @@
 <?php
 
-class ArticleController extends \BaseController {
+class ArticleController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
