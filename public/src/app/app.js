@@ -5,6 +5,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.article',
   'ngBoilerplate.menu',
   'ngBoilerplate.login',
+  'ngBoilerplate.admin',
   'ui.state',
   'ui.route'
 ])

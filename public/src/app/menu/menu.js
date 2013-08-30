@@ -9,6 +9,4 @@ angular.module( 'ngBoilerplate.menu', [
     $scope.menu = [
       { title : "Home", link: "#/home"}  
     ];
-})
-
-;
+});

@@ -1,0 +1,13 @@
+<h2>{{header}}</h2>
+<div ng-class="messageClass">{{message}}</div>
+<form ng-submit="article()">
+  <fieldset>
+    <label>Title</label>
+    <input type="text" placeholder="Insert Title Name" ng-model="input.title">
+    <label>Slug</label>
+    <input type="text" placeholder="Provide A Slug" ng-model="input.slug">
+    <label>Article Body</label>
+    <textarea ng-model="input.content" rows="20" class="span12"></textarea><br />
+    <button type="submit" class="btn">Submit</button>
+  </fieldset>
+</form>
